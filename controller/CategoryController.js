@@ -3,7 +3,12 @@ const Category = require("../model/CategoryModel");
 exports.findAllCategory_Rith = async (req, res) => {
   try {
     const categories = await Category.findAll();
-    res.json(categories);
+    let result_data = {
+      status: 200,
+      message: "Success",
+      data: categories,
+    };
+    res.json(result_data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -17,9 +22,14 @@ exports.getCategoryById_Rith = async (req, res) => {
     if (!category) {
       return res.status(404).json({ error: "Category not found" });
     }
-    // category.destroy();
 
-    res.json(category);
+    let result_data = {
+      status: 200,
+      message: "Success",
+      data: category,
+    };
+
+    res.json(result_data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

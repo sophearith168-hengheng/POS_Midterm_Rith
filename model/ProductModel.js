@@ -4,29 +4,29 @@ const sequelize = require("../config/db");
 const Product = sequelize.define(
   "product_Rith",
   {
-    Product_Rith_ID: {
+    Product_ID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    Product_Rith_Name: {
+    Product_Name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Qty_Rith: {
+    Qty: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Price_Rith: {
+    Price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Discount_Rith: {
+    Discount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Category_Rith_ID: {
+    Category_ID: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

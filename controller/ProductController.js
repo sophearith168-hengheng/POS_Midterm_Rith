@@ -21,20 +21,14 @@ exports.findProductById_Rith = async (req, res) => {
 
 exports.createProduct_Rith = async (req, res) => {
   try {
-    const {
-      Product_Rith_Name,
-      Qty_Rith,
-      Price_Rith,
-      Discount_Rith,
-      Category_Rith_ID,
-    } = req.body;
+    const { Product_Name, Qty, Price, Discount, Category_ID } = req.body;
 
     const result = await Product.create({
-      Product_Rith_Name,
-      Qty_Rith,
-      Price_Rith,
-      Discount_Rith,
-      Category_Rith_ID,
+      Product_Name,
+      Qty,
+      Price,
+      Discount,
+      Category_ID,
     });
 
     res.status(201).json(result);

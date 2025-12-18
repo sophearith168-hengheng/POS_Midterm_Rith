@@ -4,25 +4,25 @@ const sequelize = require("../config/db");
 const OrderDetail = sequelize.define(
   "order_detail_Rith",
   {
-    Odid_Rith: {
+    Odid: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    Proid_Rith: {
+    Proid: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Orid_Rith: {
+    Orid: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Qty_Rith: {
+    Qty: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Discount_Rith: {
+    Discount: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: true,
       defaultValue: 0.0,

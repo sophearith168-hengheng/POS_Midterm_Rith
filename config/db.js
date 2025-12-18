@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("pos_product_sv3", "root", "", {
+const sequelize = new Sequelize("rith_posproduct", "root", "", {
   host: "localhost",
   dialect: "mysql",
   logging: false,

@@ -4,21 +4,21 @@ const sequelize = require("../config/db");
 const Order = sequelize.define(
   "order_Rith",
   {
-    Order_Rith_ID: {
+    Order_ID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    Orderdate_Rith: {
+    Orderdate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    OrderNo_Rith: {
+    OrderNo: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    UserID_Rith: {
+    UserID: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
