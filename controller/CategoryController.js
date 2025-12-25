@@ -17,6 +17,9 @@ exports.findAllCategory_Rith = async (req, res) => {
 exports.getCategoryById_Rith = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!Number.isInteger(Number(id)) || id <= 0) {
+      return res.status(400).json({ error: "Invalid category ID" });
+    }
     const category = await Category.findByPk(id);
 
     if (!category) {
@@ -38,8 +41,19 @@ exports.getCategoryById_Rith = async (req, res) => {
 exports.createCategory_Rith = async (req, res) => {
   try {
     const category = await Category.create(req.body);
+    const existingCategory = await Category.findOne({
+      where: { Category_Name: req.body.Category_Name },
+    });
+
+    if (existingCategory) {
+      return res.status(400).json({
+        message: "Category already exists",
+        data: existingCategory,
+      });
+    }
 
     res.status(201).json({
+      status: 201,
       message: "Category created successfully",
       data: category,
     });
