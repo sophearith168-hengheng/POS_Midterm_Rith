@@ -30,7 +30,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/category", categoryRouter);
 app.use("/product", productRouter);
-// app.use('/user', userRouter);
+app.use('/user', usersRouter);
 app.use("/order", orderRouter);
 app.use("/orderDetail", orderDetailRouter);
 
