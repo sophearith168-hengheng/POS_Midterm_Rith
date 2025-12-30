@@ -1,7 +1,6 @@
 const multer = require("multer");
 const path = require("path");
 
-// Storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -11,7 +10,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// File filter (only images)
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|webp/;
 
@@ -25,12 +23,11 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Multer upload instance
 const upload = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 2 * 1024 * 1024, // 2MB
+    fileSize: 2 * 1024 * 1024,
   },
 });
 
