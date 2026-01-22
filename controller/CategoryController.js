@@ -1,66 +1,39 @@
 const Category = require("../model/CategoryModel");
+const CategoryService = require("../services/CategoryService");
 
 exports.findAllCategory_Rith = async (req, res) => {
   try {
-    const categories = await Category.findAll();
-    let result_data = {
-      status: 200,
-      message: "Success",
-      data: categories,
-    };
-    res.status(200).json(result_data);
+    const result = await CategoryService.getAllCategories();
+    res.status(result.status).json(result);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(error.status || 500).json({
+      status: error.status || 500,
+      message: error.message,
+    });
   }
 };
 
 exports.getCategoryById_Rith = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!Number.isInteger(Number(id)) || id <= 0) {
-      return res.status(400).json({ error: "Invalid category ID" });
-    }
-    const category = await Category.findByPk(id);
-
-    if (!category) {
-      return res.status(404).json({ error: "Category not found" });
-    }
-
-    let result_data = {
-      status: 200,
-      message: "Success",
-      data: category,
-    };
-
-    res.status(200).json(result_data);
+    const result = await CategoryService.getCategoryById(id);
+    res.status(result.status).json(result);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(error.status || 500).json({
+      status: error.status || 500,
+      message: error.message,
+    });
   }
 };
 
 exports.createCategory_Rith = async (req, res) => {
   try {
-    const category = await Category.create(req.body);
-    const existingCategory = await Category.findOne({
-      where: { Category_Name: req.body.Category_Name },
-    });
-
-    if (existingCategory) {
-      return res.status(400).json({
-        message: "Category already exists",
-        data: existingCategory,
-      });
-    }
-
-    res.status(201).json({
-      status: 201,
-      message: "Category created successfully",
-      data: category,
-    });
+    const result = await CategoryService.createCategory(req.body);
+    res.status(result.status).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: "Failed to create category",
-      error: error.message,
+    res.status(error.status || 500).json({
+      status: error.status || 500,
+      message: error.message,
     });
   }
 };
@@ -68,29 +41,12 @@ exports.createCategory_Rith = async (req, res) => {
 exports.updateCategory_Rith = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const [updated] = await Category.update(req.body, {
-      where: { Category_ID: id },
-    });
-
-    if (updated === 0) {
-      return res.status(404).json({
-        message: "Category not found",
-      });
-    }
-
-    const updatedCategory = await Category.findOne({
-      where: { Category_ID: id },
-    });
-
-    res.status(200).json({
-      message: "Category updated successfully",
-      data: updatedCategory,
-    });
+    const result = await CategoryService.updateCategory(id, req.body);
+    res.status(result.status).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: "Failed to update category",
-      error: error.message,
+    res.status(error.status || 500).json({
+      status: error.status || 500,
+      message: error.message,
     });
   }
 };
@@ -98,27 +54,12 @@ exports.updateCategory_Rith = async (req, res) => {
 exports.deleteCategory_Rith = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const deleted = await Category.destroy({
-      where: { Category_ID: id },
-    });
-
-    if (deleted === 0) {
-      return res.status(404).json({
-        message: "Category not found",
-      });
-    }
-
-    res.status(204).send({
-      message: "Category deleted successfully",
-      data: {
-        Category_ID: id,
-      },
-    });
+    const result = await CategoryService.deleteCategory(id);
+    res.status(result.status).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: "Failed to delete category",
-      error: error.message,
+    res.status(error.status || 500).json({
+      status: error.status || 500,
+      message: error.message,
     });
   }
 };

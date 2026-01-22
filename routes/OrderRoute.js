@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { authMiddleware } = require("../middlewares/authMiddleware");
 
 const {
   findAllOrder_Rith,
@@ -9,13 +10,11 @@ const {
   DeleteOrder_Rith,
 } = require("../controller/OrderController");
 
-router.get("/", findAllOrder_Rith);
-router.get("/:id", findAllOrderID_Rith);
-
-router.post("/", createOrder_Rith);
-
-router.put("/:id", UpdateOrder_Rith);
-
-router.delete("/:id", DeleteOrder_Rith);
+// Protected endpoints
+router.get("/", authMiddleware, findAllOrder_Rith);
+router.get("/:id", authMiddleware, findAllOrderID_Rith);
+router.post("/", authMiddleware, createOrder_Rith);
+router.put("/:id", authMiddleware, UpdateOrder_Rith);
+router.delete("/:id", authMiddleware, DeleteOrder_Rith);
 
 module.exports = router;
